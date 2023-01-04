@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+:root{
+    --main-color:#ff005c;
+    --hover-color:#b00443;
+}
+
+h1{
+    margin: 4rem 0;
+    text-align: center;
+    font-size: 2.7rem;
+    font-weight: 600;
+    color: var(--main-color);
+}
+
+td button{
+    margin-top: 0.2rem;
+    font-size: xx-large;
+    color: #fff;
+    border: none;
+    transition: 0.6s;
+}
+
+td button:hover{
+    color: #333232;
+    transition: 0.6s;
+}
+.center{
+    display: inline;
+}
+.red{
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ff0000;
+    
+}
+.green{
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #09b109;   
+}
+.invisible{
+    display: none;
+}
+.form-icon{
+    width: 3%;
+    display: inline;
+}
+
+.add i{
+    font-size: xx-large;
+    color: #fff;
+    position: relative;
+    margin-left: 18%;
+    margin-top: 48%;
+    transform: translateX(-50%);
+    transform: translateY(-50%);
+}
+.add{
+    width: 50px;
+    height: 50px;
+    float: right;
+    margin-right: 5%;
+    position: relative;
+    top: -2rem;
+    background-color: #09b109;
+    border-radius: 100%;
+    transition: 0.6s;
+}
+.add:hover{
+    background-color: #036903;
+    transition: 0.6s;
+}
