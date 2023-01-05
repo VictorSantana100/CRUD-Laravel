@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <h3 class="margin-top">Vínculo empregatício<span class="red">*</span></h3>
+            <h3 class="margin-top">Vínculo empregatício</h3>
             <div class="row">
                 <div class="col-lg-6">
                     <label for="Cargo">Cargo<span class="red">*</span></label>
