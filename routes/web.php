@@ -27,7 +27,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function(){
     Route::post('/insert-user','UserController@set_insert_user');
     Route::post('/delete-user','UserController@set_drop_user');
     Route::post('/update-user','UserController@set_update_user')->name('update.user.post');
-
-
 });
 
