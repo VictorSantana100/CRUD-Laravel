@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Model
 {
@@ -15,4 +16,8 @@ class User extends Model
         'num_celular',
         'email'
     ];
+
+    public function vinculo(){
+        return $this->HasOne(VinculoEmpregaticio::class, 'user_key');
+    }
 }

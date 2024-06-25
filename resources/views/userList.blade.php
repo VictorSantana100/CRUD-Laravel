@@ -22,7 +22,7 @@
 <body>
 
     <h1>Lista de usuários</h1>
-    <a class="add" href="/insert-user"><i class="las la-plus-circle"></i></a>
+    <a class="add" href="/insert-user"><i class="las la-plus-circle" title="Criar Usuário"></i></a>
 
     <section class="container">
 
@@ -56,25 +56,17 @@
                         <th scope="row">{{$user->id}}</th>
                         <td>{{$user->primeiro_nome ." ". $user->sobrenome}}</td>
                         <td>{{$user->email}}</td>
-                        @php
-                            $vinculo = '';
-                            $vinculo = DB::table('vinculo_empregaticio')->where('user_key',$user->id)->first();
-                        @endphp
-                        <td>{{$vinculo->cargo}}</td>
-                        <td>{{$vinculo->departamento}}</td>
-                        <td class="center">
-                            <form class="form-icon" action="/load-user"  method="GET">
-                                @csrf
-                                <input name="user_id" class="invisible" type="number" value="{{$user->id}}">
-                                <button type="submit" class="las la-pen-square green"></button>
-                            </form>
+                        <td>{{$user->vinculo->cargo}}</td>
+                        <td>{{$user->vinculo->departamento}}</td>
 
-                            <form class="form-icon" action="/delete-user"  method="POST">
-                                @csrf
-                                <input name="user_id" class="invisible" type="number" value="{{$user->id}}">
-                                <button type="submit" class="las la-user-slash red"></button>
-                            </form>
+                        <td class="center">
+                            <a href="{{ route('get.user', $user->id) }}" class="las la-pen-square edit-button green" title="Editar"></a>
                             
+                            <form class="form-icon" action="{{ route('user.destroy', $user->id) }}"  method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="las la-trash-alt red" title="Excluir"></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

@@ -18,7 +18,7 @@ h1{
     color: var(--main-color);
 }
 
-td button{
+td button, .edit-button{
     margin-top: 0.2rem;
     font-size: xx-large;
     color: #fff;
@@ -26,9 +26,10 @@ td button{
     transition: 0.6s;
 }
 
-td button:hover{
+td .edit-button:hover, button:hover{
     color: #333232;
     transition: 0.6s;
+    text-decoration: none;
 }
 .center{
     display: inline;

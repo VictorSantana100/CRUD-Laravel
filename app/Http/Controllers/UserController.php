@@ -16,16 +16,16 @@ class UserController extends Controller
     }
 
     public function set_insert_user(FormValidate $request){
-        $user = new User();
-        $user->primeiro_nome = $request->primeiro_nome;
-        $user->sobrenome = $request->sobrenome;
-        $user->num_celular = $request->num_celular;
-        $user->email = $request->email;
+        $user = User::create([
+            'primeiro_nome' => $request->primeiro_nome,
+            'sobrenome' => $request->sobrenome,
+            'num_celular' => $request->num_celular,
+            'email' => $request->email
+        ]);
 
-        if($user->save()){
+        if($user){
             $new_user = DB::table('users')->where('email',$request->email)->first();
             $user_key = $new_user->id;
-
             $vinculo = new VinculoEmpregaticio();
             $vinculo->cargo = $request->cargo;
             $vinculo->departamento = $request->departamento;
@@ -40,57 +40,40 @@ class UserController extends Controller
         return redirect()->route('insert.user');
     }
 
-    public function get_load_user(Request $request){
-        $user = DB::table('users')->where('id', $request->user_id)->first();
-        $primeiro_nome = $user->primeiro_nome;
-        $sobrenome = $user->sobrenome;
-        $num_celular = $user->num_celular;
-        $email = $user->email;
-
-        $vinculo = DB::table('vinculo_empregaticio')->where('user_key',$request->user_id)->first();
-        $cargo = $vinculo->cargo;
-        $departamento = $vinculo->departamento;
-
+    public function get_load_user($user_id){
+        $user = User::with('vinculo')->where('id', $user_id)->first();
         return view('user_update',[
-            'primeiro_nome'=>$primeiro_nome,
-            'sobrenome'=>$sobrenome,
-            'num_celular'=>$num_celular,
-            'email'=>$email,
-            'cargo'=>$cargo,
-            'departamento'=>$departamento,
-            'user_id'=>$request->user_id
+            'user'=>$user
         ]);
     }
 
-    public function set_update_user(UpdateValidate $request){
-        $atualiza_user = User::find($request->id);
-        $atualiza_user->primeiro_nome = $request->primeiro_nome;
-        $atualiza_user->sobrenome = $request->sobrenome;
-        $atualiza_user->num_celular = $request->num_celular;
-        $atualiza_user->email = $request->email;
-
-        if($atualiza_user->save()){
-
-            $vinculo = DB::table('vinculo_empregaticio')->where('user_key', $request->id)->first();
-            $atualiza_vinculo = VinculoEmpregaticio::find($vinculo->id);
-            $atualiza_vinculo->cargo = $request->cargo;
-            $atualiza_vinculo->departamento = $request->departamento;
-            
-            if($atualiza_vinculo->save()){
-
-                session()->flash('success', 'Usuário atualizado com sucesso!');
-                return redirect()->route('list.users');
-            }
+    public function set_update_user(Request $request, $user_id){
+        $user = User::where('id', $user_id)->first();
+        if(!$user)
+            return  session()->flash('error', 'Usuário não encontrado!');
+        $user->update([
+            'primeiro_nome' => $request->primeiro_nome,
+            'sobrenome' => $request->sobrenome,
+            'num_celular' => $request->num_celular,
+            'email' => $request->email
+        ]);
+        
+        $vinculo = DB::table('vinculo_empregaticio')->where('user_key', $user_id)->first();
+        $atualiza_vinculo = VinculoEmpregaticio::find($vinculo->id);
+        $atualiza_vinculo->cargo = $request->cargo;
+        $atualiza_vinculo->departamento = $request->departamento;
+        if($atualiza_vinculo->save()){
+            session()->flash('success', 'Usuário atualizado com sucesso!');
+            return redirect()->route('list.users');
         }
-
         session()->flash('error', 'Erro ao atualizar usuário!');
         return redirect()->route('list.users');
     }
 
-    public function set_drop_user(Request $request){
-        $vinculo = DB::table('vinculo_empregaticio')->where('user_key',$request->user_id)->first();
+    public function set_drop_user($user_id){
+        $vinculo = DB::table('vinculo_empregaticio')->where('user_key', $user_id)->first();
         if(VinculoEmpregaticio::destroy($vinculo->id)){
-            if(User::destroy($request->user_id)){
+            if(User::destroy($user_id)){
                 session()->flash('success', 'Usuário deletado com sucesso!');
                 return redirect()->route('list.users');
             }
