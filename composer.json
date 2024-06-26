@@ -1,8 +1,14 @@
 {
-    "name": "laravel/laravel",
+    "name": "crud/laravel",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "implementation of a basic CRUD using PHP with the Laravel framework",
+    "keywords": ["crud", "laravel", "php"],
+    "authors": [
+        {
+            "name": "Victor Santana",
+            "email": "santanav589@gmail.com"
+        }
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
