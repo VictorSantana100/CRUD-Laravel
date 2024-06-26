@@ -26,13 +26,13 @@
 
     <section class="container">
 
-        @if(session()->has('success'))
+        @if (session()->has('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
-            
-        @if(session()->has('error'))
+
+        @if (session()->has('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
@@ -51,18 +51,18 @@
             </thead>
             <tbody>
 
-                @foreach($users as $user)
+                @foreach ($users as $user)
                     <tr>
-                        <th scope="row">{{$user->id}}</th>
-                        <td>{{$user->primeiro_nome ." ". $user->sobrenome}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>{{$user->vinculo->cargo}}</td>
-                        <td>{{$user->vinculo->departamento}}</td>
+                        <th scope="row">{{ $user->id }}</th>
+                        <td>{{ $user->primeiro_nome . ' ' . $user->sobrenome }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->vinculo->cargo }}</td>
+                        <td>{{ $user->vinculo->departamento }}</td>
 
                         <td class="center">
-                            <a href="{{ route('get.user', $user->id) }}" class="las la-pen-square edit-button green" title="Editar"></a>
-                            
-                            <form class="form-icon" action="{{ route('user.destroy', $user->id) }}"  method="POST">
+                            <a href="{{ route('get.user', $user->id) }}" class="las la-pen-square edit-button green"
+                                title="Editar"></a>
+                            <form class="form-icon" action="{{ route('user.destroy', $user->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="las la-trash-alt red" title="Excluir"></button>
@@ -78,7 +78,7 @@
     <!-- jQuery  -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    
+
     <!--Tabela-->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
@@ -86,8 +86,7 @@
     <script>
         $(document).ready(function() {
             $('#id_tabela').DataTable({
-                "language": 
-                {
+                "language": {
                     "lengthMenu": "Exibindo _MENU_ registros por página",
                     "zeroRecords": "Nenhum registro encontrado",
                     "info": "Mostrando página _PAGE_ de _PAGES_",
@@ -97,8 +96,7 @@
                     "sProcessing": "Processando...",
                     "sZeroRecords": "Nenhum registro encontrado",
                     "sSearch": "Pesquisar",
-                    "oPaginate": 
-                    {
+                    "oPaginate": {
                         "sNext": "Próximo",
                         "sPrevious": "Anterior",
                         "sFirst": "Primeiro",
