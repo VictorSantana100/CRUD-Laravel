@@ -2,6 +2,8 @@
 
 Este projeto demonstra a implementação de um CRUD básico utilizando PHP com o framework Laravel. O CRUD realiza operações de Visualizar, Cadastrar, Editar e Excluir dados de usuários em um banco de dados MySQL. A interface é desenvolvida de forma clara e intuitiva utilizando Bootstrap e o Blade template do Laravel.
 
+![Implementação de CRUD com Laravel](https://raw.githubusercontent.com/VictorSantana100/CRUD-Laravel/master/public/img/crud.jpeg)
+
 ## Requisitos
 
 - PHP: 8
